@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QuietTicket（静票）— claim-ticket silent voting</title>
+<meta name="description" content="Walletless simulation of QuietTicket: mint claim tickets, claim a ballot, cast a sealed vote, reject double votes, close and tally. Built for Tari November Build Contest t/520.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>QuietTicket <span>静票</span></h1>
+  <p class="lead">Community silent voting for Tari Ootle: organizers mint claim tickets, holders vote once under seal, observers see commitments and nullifiers — not who chose what.</p>
+
+  <ul class="deltas">
+    <li><strong>vs Phantom Drop:</strong> money envelopes → <em>ballot credentials + sealed tally</em> (same stealth claim-link DNA, new governance primitive).</li>
+    <li><strong>vs Séance:</strong> fixed pubkey rings → <em>open claim-ticket enrollment</em> (no key roster before the poll).</li>
+    <li><strong>Judges:</strong> this page alone is the submission demo path — no wallet, no faucet.</li>
+  </ul>
+
+  <div class="btns">
+    <a href="https://github.com/hycorange/quiet-ticket">Source</a>
+    <a href="https://github.com/hycorange/quiet-ticket/blob/main/docs/THREAT-MODEL.md">Threat model</a>
+    <a href="https://community.tari.com/t/520">Contest t/520</a>
+  </div>
+
+  <h2>Play demo <span class="pill open" id="phasePill">idle</span></h2>
+  <p class="step-hint" id="hint">1) Create a poll → 2) Mint tickets → 3) Claim → 4) Cast → 5) Try double-vote → 6) Close &amp; tally.</p>
+
+  <div class="grid2">
+    <section class="card" id="setupCard">
+      <h3 style="margin-top:0">Create poll</h3>
+      <label>Question</label>
+      <input id="question" value="Should we ship QuietTicket to Discord mods this month?">
+      <label>Options (one per line, 2–6)</label>
+      <textarea id="options">Yes — ship the MVP
+No — wait for Esmeralda live
+Abstain</textarea>
+      <label>Ticket count (1–64)</label>
+      <input id="ticketCount" type="number" min="1" max="64" value="5">
+      <label>Deadline label</label>
+      <input id="deadline" value="demo-epoch + 1">
+      <div class="row">
+        <button class="primary" id="btnCreate">Create poll</button>
+        <button class="ghost" id="btnMint" disabled>Mint claim tickets</button>
+        <button class="ghost" id="btnReset">Reset</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-top:0">Cast as a voter</h3>
+      <label>Ticket</label>
+      <select id="ticketSelect" disabled></select>
+      <label>Choice</label>
+      <select id="choiceSelect" disabled></select>
+      <div class="row">
+        <button class="primary" id="btnClaim" disabled>Claim ticket</button>
+        <button class="primary" id="btnCast" disabled>Cast sealed vote</button>
+        <button class="danger" id="btnDouble" disabled>Try double vote</button>
+      </div>
+      <div class="row" style="margin-top:14px">
+        <button class="ghost" id="btnClose" disabled>Close poll</button>
+        <button class="primary" id="btnTally" disabled>Reveal &amp; tally</button>
+      </div>
+      <p class="dim" id="voterMsg" style="margin-top:12px"></p>
+    </section>
+  </div>
+
+  <section class="card">
+    <h3 style="margin-top:0">Claim tickets</h3>
+    <div id="ticketList" class="dim">No tickets yet.</div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h3 style="margin-top:0">Event log</h3>
+      <div class="log mono" id="logBox"></div>
+    </section>
+    <section class="card chain">
+      <h3 style="margin-top:0">What the chain sees</h3>
+      <p class="dim">Public events only. Red = still hidden from observers.</p>
+      <div id="chainBox"></div>
+    </section>
+  </div>
+
+  <section class="card" id="tallyCard" hidden>
+    <h3 style="margin-top:0">Tally</h3>
+    <div id="tallyBox"></div>
+  </section>
+
+  <footer>
+    MIT · hycorange / Orange Soda · simulation uses Web Crypto SHA-256; production path is a Tari Ootle template (next chunk). Esmeralda live is optional bonus.
+  </footer>
+</main>
+<script src="sim.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

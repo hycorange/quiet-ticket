@@ -1,0 +1,24 @@
+# Secrets & local env — never commit
+.env
+.env.*
+*.env
+secrets/
+.secrets/
+*.key
+*.pem
+*.seed
+wallet.json
+**/wallet*
+**/mnemonic*
+**/private*
+
+# Tooling / OS
+target/
+node_modules/
+.DS_Store
+*.swp
+*.log
+.idea/
+.vscode/
+dist/
+.phantom/
