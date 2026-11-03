@@ -77,8 +77,9 @@ See [`docs/THREAT-MODEL.md`](docs/THREAT-MODEL.md).
 - [x] Walletless browser simulation (create → mint → claim → cast → reject double → close/tally)
 - [x] README delta lines, MIT, threat-model sketch, Pages workflow
 - [x] Rust Ootle `#[template]` scaffold (`src/lib.rs`) + domain tags + engine test stubs (`tests/engine_flow.rs`)
-- [ ] Sapient / Esmeralda live path (optional bonus)
-- [ ] Forum submission pack + Bluesky/Medium announce (via 悬赏比赛; no X)
+- [ ] Sapient / Esmeralda live path (optional bonus — plan in `docs/ESMERALDA-PLAN.md`; not deployed)
+- [x] Forum submission pack drafts (`submission/`) — **not posted**; Bluesky/Medium via 悬赏比赛 after money OK (no X)
+- [ ] Forum / social actually published (needs money OK)
 
 ### Rust / engine
 
