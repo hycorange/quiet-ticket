@@ -45,7 +45,7 @@ The simulation engine lives in `site/sim.js` (browser-only: SHA-256 commitments,
 | Sealed cast | Option ciphertext + nullifier. Second cast with same nullifier fails. |
 | Close / reveal / tally | After deadline: open sealed ballots, publish verifiable counts. |
 | Sim demo | Full flow offline in the browser. |
-| Ootle template (next) | Rust `tari_template_lib` wasm + engine tests — scaffold in later chunk. |
+| Ootle template | Rust `tari_template_lib` wasm (`src/lib.rs`) + `tests/engine_flow.rs` via `tari_template_test_tooling`. |
 
 ```
 organizer ──mint──▶  N claim tickets (links / QR)
@@ -76,9 +76,16 @@ See [`docs/THREAT-MODEL.md`](docs/THREAT-MODEL.md).
 
 - [x] Walletless browser simulation (create → mint → claim → cast → reject double → close/tally)
 - [x] README delta lines, MIT, threat-model sketch, Pages workflow
-- [ ] Rust Ootle template + engine unit tests
+- [x] Rust Ootle `#[template]` scaffold (`src/lib.rs`) + domain tags + engine test stubs (`tests/engine_flow.rs`)
 - [ ] Sapient / Esmeralda live path (optional bonus)
 - [ ] Forum submission pack + Bluesky/Medium announce (via 悬赏比赛; no X)
+
+### Rust / engine
+
+```bash
+rustup show   # expects 1.97.1 + wasm32-unknown-unknown
+cargo test    # TemplateTest compiles template wasm; see docs/TOOLCHAIN.md
+```
 
 ## License
 
